@@ -67,3 +67,28 @@ function render() {
   }
 }
 render();
+
+document.getElementById('prev').addEventListener('click', () => {
+  currentDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    1
+  );
+  render();
+});
+
+document.getElementById('next').addEventListener('click', () => {
+  currentDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    1
+  );
+  render();
+});
+
+pickerEl.addEventListener('change', () => {
+  if (!pickerEl.value) return;
+  const [y, m] = pickerEl.value.split('-').map(Number);
+  currentDate = new Date(y, m - 1, 1);
+  render();
+});
