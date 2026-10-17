@@ -56,9 +56,9 @@ function render() {
       })
     );
 
-    if (date.getMonth() !== month) td.classList.add('fade');
+    if (date.getMonth() !== month) btn.classList.add('fade');
     if (date.toDateString() === today) {
-      td.classList.add('today');
+      btn.classList.add('today');
       btn.setAttribute('aria-current', 'date');
     }
 

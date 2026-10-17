@@ -23,6 +23,10 @@ main {
   align-items: center;
 }
 
+#month-year {
+  text-align: center;
+}
+
 #month-picker {
   grid-column: 2;
 }
@@ -69,5 +73,25 @@ td {
   text-align: center;
   vertical-align: top;
   padding: 10px 0;
-  border-radius: 5px;
+}
+
+th {
+  font-weight: 700;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+}
+
+button.today {
+  font-weight: 700;
+  color: white;
+  /* padding: 0.3rem; */
+  background-color: rgb(53, 7, 7);
+}
+
+button.fade {
+  color: brown;
 }
