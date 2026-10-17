@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="web.mjs"></script>
+  <title>Calendars</title>
+</head>
+
+<body>
+  <main>
+    <section class="calendar" aria-labelledby="month-year">
+      <header class="header">
+        <h1 id="month-year" aria-live="polite"></h1>
+        <nav aria-label="Calendar navigation">
+          <button id="prev" class="btn" type="button" aria-label="Previous month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <input id="month-picker" type="month" aria-label="Choose month and year">
+
+          <button id="next" class="btn" type="button" aria-label="Next month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      <table aria-labelledby="month-year">
+        <thead>
+          <tr>
+            <th scope="col"><abbr title="Sunday">Sun</abbr></th>
+            <th scope="col"><abbr title="Monday">Mon</abbr></th>
+            <th scope="col"><abbr title="Tuesday">Tue</abbr></th>
+            <th scope="col"><abbr title="Wednesday">Wed</abbr></th>
+            <th scope="col"><abbr title="Thursday">Thu</abbr></th>
+            <th scope="col"><abbr title="Friday">Fri</abbr></th>
+            <th scope="col"><abbr title="Saturday">Sat</abbr></th>
+          </tr>
+        </thead>
+        <tbody id="days"></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+
+</html>
