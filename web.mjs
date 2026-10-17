@@ -1,94 +1,62 @@
-import { getGreeting } from './common.mjs';
+import {
+  formatMonthTitle,
+  getFirstDayOfMonth,
+  formatMonthValue,
+  shiftMonth,
+  changeMonthValue,
+  getCalendarWeeks,
+} from './common.mjs';
 import daysData from './days.json' with { type: 'json' };
 
 const monthYearEl = document.getElementById('month-year');
 const pickerEl = document.getElementById('month-picker');
 const daysEl = document.getElementById('days');
-const DAYS_IN_WEEK = 7;
-const LOCALE = 'en-GB';
 
-let currentDate = new Date();
-currentDate.setDate(1);
+let currentDate = getFirstDayOfMonth();
 
 function render() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const trailingDays =
-    (DAYS_IN_WEEK - ((firstDayOfMonth + daysInMonth) % DAYS_IN_WEEK)) %
-    DAYS_IN_WEEK;
-
-  const totalCalendarCells = firstDayOfMonth + daysInMonth + trailingDays;
-
-  monthYearEl.textContent = currentDate.toLocaleDateString(LOCALE, {
-    month: 'long',
-    year: 'numeric',
-  });
-
-  pickerEl.value = `${year}-${String(month + 1).padStart(2, '0')}`;
-
-  const today = new Date().toDateString();
+  monthYearEl.textContent = formatMonthTitle(currentDate);
+  pickerEl.value = formatMonthValue(currentDate);
   daysEl.replaceChildren();
 
-  let row;
-  for (let i = 0; i < totalCalendarCells; i++) {
-    if (i % DAYS_IN_WEEK === 0) {
-      row = document.createElement('tr');
-      daysEl.append(row);
+  for (const week of getCalendarWeeks(currentDate)) {
+    const row = document.createElement('tr');
+
+    for (const cell of week) {
+      const td = document.createElement('td');
+      const btn = document.createElement('button');
+
+      btn.type = 'button';
+      btn.textContent = cell.day;
+      btn.setAttribute('aria-label', cell.label);
+
+      if (cell.isOutsideMonth) btn.classList.add('fade');
+      if (cell.isToday) {
+        btn.classList.add('today');
+        btn.setAttribute('aria-current', 'date');
+      }
+
+      td.append(btn);
+      row.append(td);
     }
-
-    const date = new Date(year, month, 1 - firstDayOfMonth + i);
-    const td = document.createElement('td');
-    const btn = document.createElement('button');
-
-    btn.type = 'button';
-    btn.textContent = date.getDate();
-    console.log(date.getDate());
-    btn.setAttribute(
-      'aria-label',
-      date.toLocaleDateString(LOCALE, {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      })
-    );
-
-    if (date.getMonth() !== month) btn.classList.add('fade');
-    if (date.toDateString() === today) {
-      btn.classList.add('today');
-      btn.setAttribute('aria-current', 'date');
-    }
-
-    td.append(btn);
-    row.append(td);
+    daysEl.append(row);
   }
 }
 render();
 
 document.getElementById('prev').addEventListener('click', () => {
-  currentDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() - 1,
-    1
-  );
+  currentDate = shiftMonth(currentDate, -1);
   render();
 });
 
 document.getElementById('next').addEventListener('click', () => {
-  currentDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
-    1
-  );
+  currentDate = shiftMonth(currentDate, 1);
   render();
 });
 
 pickerEl.addEventListener('change', () => {
-  if (!pickerEl.value) return;
-  const [y, m] = pickerEl.value.split('-').map(Number);
-  currentDate = new Date(y, m - 1, 1);
+  const date = changeMonthValue(pickerEl.value);
+  if (!date) return;
+  currentDate = date;
   render();
 });
