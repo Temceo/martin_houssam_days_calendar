@@ -30,7 +30,9 @@ function render() {
       btn.textContent = cell.day;
       btn.setAttribute('aria-label', cell.label);
 
+      // show days from another month in a different colour
       if (cell.isOutsideMonth) btn.classList.add('fade');
+      // set a background colour to today's date
       if (cell.isToday) {
         btn.classList.add('today');
         btn.setAttribute('aria-current', 'date');
