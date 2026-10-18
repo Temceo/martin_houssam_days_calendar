@@ -22,7 +22,7 @@ function formatDayLabel(date) {
 }
 
 export function formatMonthValue(date) {
-  // format value in month title - eg October 2026
+  // format value in month value in picker - eg - "2026-10", "2026-06"
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 }
 
