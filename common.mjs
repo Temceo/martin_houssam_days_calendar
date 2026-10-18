@@ -44,7 +44,7 @@ export function getCalendarWeeks(currentDate, today = new Date()) {
   //week index is 0 to 6 - 0 being Sunday
   const firstDayIndex = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  // days outside current month
+  // days that roll into the following month
   const trailingDays =
     (DAYS_IN_WEEK - ((firstDayIndex + daysInMonth) % DAYS_IN_WEEK)) %
     DAYS_IN_WEEK;
