@@ -41,20 +41,21 @@ export function shiftMonth(date, offset) {
 export function getCalendarWeeks(currentDate, today = new Date()) {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-
-  const firstDay = new Date(year, month, 1).getDay();
+  //week index is 0 to 6 - 0 being Sunday
+  const firstDayIndex = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   // days outside current month
   const trailingDays =
-    (DAYS_IN_WEEK - ((firstDay + daysInMonth) % DAYS_IN_WEEK)) % DAYS_IN_WEEK;
+    (DAYS_IN_WEEK - ((firstDayIndex + daysInMonth) % DAYS_IN_WEEK)) %
+    DAYS_IN_WEEK;
 
-  const totalCells = firstDay + daysInMonth + trailingDays;
+  const totalCells = firstDayIndex + daysInMonth + trailingDays;
   const todayString = today.toDateString();
 
   const weeks = [];
   for (let i = 0; i < totalCells; i++) {
     if (i % DAYS_IN_WEEK === 0) weeks.push([]);
-    const date = new Date(year, month, 1 - firstDay + i);
+    const date = new Date(year, month, 1 - firstDayIndex + i);
     weeks[weeks.length - 1].push({
       date,
       day: date.getDate(),
