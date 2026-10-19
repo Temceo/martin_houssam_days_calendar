@@ -45,6 +45,34 @@ function renderCalendar() {
 // Display the current month when the page loads
 renderCalendar();
 
+// handle the month picker changes 
+monthPicker.addEventListener("change", handleMonthChange);
+
+function handleMonthChange() {
+  const selectedMonth = monthPicker.value;
+
+  // Check if the selected value has the correct format
+  if (!/^\d{4}-\d{2}$/.test(selectedMonth)) {
+    renderCalendar();
+    return;
+  }
+
+  // Extract the year and month
+  const [year, month] = selectedMonth.split("-").map(Number);
+
+  // Check if the year and month are valid
+  if (month < 1 || month > 12 || year < 1000 || year > 9999) {
+    renderCalendar();
+    return;
+  }
+
+  // Update the selected date
+  date = new Date(year, month - 1, 1);
+
+  // Display the selected month
+  renderCalendar();
+}
+
 // display previous month on click of previous button
 document.getElementById('prev').addEventListener('click', () => {
   date = shiftMonth(date, -1);
