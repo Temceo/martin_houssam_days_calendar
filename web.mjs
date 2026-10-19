@@ -104,8 +104,7 @@ async function showEventDetails(events, day) {
       if (!response.ok) throw new Error(response.status);
       details.textContent = await response.text();
     } catch (error) {
-      details.textContent = 'Could not load the description.';
-      console.error(error);
+      details.textContent = `Could not load the description: ${error}`;
     }
   }
 }
