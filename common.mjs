@@ -1,44 +1,6 @@
 import days from './days.json' with { type: 'json' };
 
 const DAYS_IN_WEEK = 7;
-const LOCALE = 'en-GB'; // set date format to British standard
-
-export function getFirstDayOfMonth(date = new Date()) {
-  return new Date(date.getFullYear(), date.getMonth(), 1);
-}
-
-export function formatMonthTitle(date) {
-  return date.toLocaleDateString(LOCALE, {
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
-function formatDayLabel(date) {
-  return date.toLocaleDateString(LOCALE, {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
-export function formatMonthValue(date) {
-  // format value in month value in picker - eg - "2026-10", "2026-06"
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-}
-
-export function changeMonthValue(value) {
-  // format date value inside date picker
-  if (!value) return null;
-  const [year, month] = value.split('-').map(Number);
-  return new Date(year, month - 1, 1);
-}
-
-// shift previous or next month
-export function shiftMonth(date, offset) {
-  return new Date(date.getFullYear(), date.getMonth() + offset, 1);
-}
 
 export function getCalendarWeeks(today = new Date()) {
   const year = today.getFullYear();
