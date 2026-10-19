@@ -139,6 +139,10 @@ td {
   visibility: hidden;
 }
 
+.has-event {
+  cursor: pointer;
+}
+
 .has-event:hover + .tooltip,
 .has-event:focus-visible + .tooltip {
   opacity: 1;
