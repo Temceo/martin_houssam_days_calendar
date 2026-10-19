@@ -10,6 +10,9 @@ function renderCalendar(date = new Date()) {
     year: "numeric",
   });
 
+  // Remove previously displayed calendar rows
+  daysElement.replaceChildren();
+
   // Get the weeks calculated in common.mjs
   const weeks = getCalendarWeeks(date);
 
@@ -29,7 +32,6 @@ function renderCalendar(date = new Date()) {
 
     daysElement.append(row);
   }
-  
 }
-
+// Display the current month when the page loads
 renderCalendar();
