@@ -14,10 +14,7 @@ function renderCalendar() {
   });
 
   // Keep the month picker synchronised
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-
-  monthPicker.value = `${year}-${month}`;
+  restoreMonthPicker();
 
   // Remove previously displayed calendar rows
   daysElement.replaceChildren();
@@ -27,10 +24,10 @@ function renderCalendar() {
 
   // Create one table row for each week
   for (const week of weeks) {
-    const row = document.createElement("tr");
+    const row = document.createElement('tr');
     // Create seven cells for each week
     for (const day of week) {
-      const cell = document.createElement("td");
+      const cell = document.createElement('td');
       // Only show days belonging to the selected month
       if (!day.isOutsideMonth) {
         cell.textContent = day.day;
@@ -53,7 +50,7 @@ function handleMonthChange() {
 
   // Check if the selected value has the correct format
   if (!/^\d{4}-\d{2}$/.test(selectedMonth)) {
-    renderCalendar();
+    restoreMonthPicker();
     return;
   }
 
@@ -62,7 +59,7 @@ function handleMonthChange() {
 
   // Check if the year and month are valid
   if (month < 1 || month > 12 || year < 1000 || year > 9999) {
-    renderCalendar();
+    restoreMonthPicker();
     return;
   }
 
@@ -84,3 +81,11 @@ document.getElementById('next').addEventListener('click', () => {
   date = shiftMonth(date, 1);
   renderCalendar();
 });
+
+// restore the month picker 
+function restoreMonthPicker() {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+
+  monthPicker.value = `${year}-${month}`;
+}
