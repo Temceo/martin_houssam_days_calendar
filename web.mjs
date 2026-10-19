@@ -33,6 +33,11 @@ function renderCalendar() {
         cell.textContent = day.day;
       }
 
+      // check for events
+      if (day.events.length > 0) {
+        console.log(day.label);
+        console.log(day.events);
+      }
       row.append(cell);
     }
 
@@ -42,8 +47,8 @@ function renderCalendar() {
 // Display the current month when the page loads
 renderCalendar();
 
-// handle the month picker changes 
-monthPicker.addEventListener("change", handleMonthChange);
+// handle the month picker changes
+monthPicker.addEventListener('change', handleMonthChange);
 
 function handleMonthChange() {
   const selectedMonth = monthPicker.value;
@@ -55,7 +60,7 @@ function handleMonthChange() {
   }
 
   // Extract the year and month
-  const [year, month] = selectedMonth.split("-").map(Number);
+  const [year, month] = selectedMonth.split('-').map(Number);
 
   // Check if the year and month are valid
   if (month < 1 || month > 12 || year < 1000 || year > 9999) {
@@ -82,10 +87,10 @@ document.getElementById('next').addEventListener('click', () => {
   renderCalendar();
 });
 
-// restore the month picker 
+// restore the month picker
 function restoreMonthPicker() {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, '0');
 
   monthPicker.value = `${year}-${month}`;
 }
