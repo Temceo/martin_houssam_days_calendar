@@ -1,6 +1,16 @@
 import days from './days.json' with { type: 'json' };
 
 const DAYS_IN_WEEK = 7;
+const LOCALE = 'en-GB'; // set date format to British standard
+
+function formatDayLabel(date) {
+  return date.toLocaleDateString(LOCALE, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
 
 export function getCalendarWeeks(today = new Date()) {
   const year = today.getFullYear();
