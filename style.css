@@ -96,6 +96,10 @@ button.fade {
   color: brown;
 }
 
+.arrow-label {
+  font-weight: 700;
+}
+
 /* events */
 
 .has-event {
