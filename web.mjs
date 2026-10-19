@@ -6,11 +6,11 @@ import {
   changeMonthValue,
   getCalendarWeeks,
 } from './common.mjs';
-import daysData from './days.json' with { type: 'json' };
 
 const monthYearEl = document.getElementById('month-year');
 const pickerEl = document.getElementById('month-picker');
 const daysEl = document.getElementById('days');
+const eventDetailsEl = document.getElementById('show-event-details');
 
 let currentDate = getFirstDayOfMonth();
 
@@ -37,6 +37,21 @@ function render() {
         btn.classList.add('today');
         btn.setAttribute('aria-current', 'date');
       }
+      //check for events
+      if (cell.events.length > 0) {
+        const names = cell.events.map((e) => e.name).join(', ');
+        btn.classList.add('has-event');
+        btn.title = names;
+        btn.setAttribute('aria-label', `${cell.label}, ${names}`);
+        btn.addEventListener('click', () => showEventDetails(cell.events));
+
+        const toolTip = document.createElement('span');
+        toolTip.className = 'tooltip';
+        toolTip.textContent = names;
+        toolTip.setAttribute('aria-hidden', 'true');
+
+        td.append(btn, toolTip);
+      }
 
       td.append(btn);
       row.append(td);
@@ -45,14 +60,21 @@ function render() {
   }
 }
 render();
+clearEventDetails();
+
+function clearEventDetails() {
+  eventDetailsEl.replaceChildren();
+}
 
 document.getElementById('prev').addEventListener('click', () => {
   currentDate = shiftMonth(currentDate, -1);
+  clearEventDetails();
   render();
 });
 
 document.getElementById('next').addEventListener('click', () => {
   currentDate = shiftMonth(currentDate, 1);
+  clearEventDetails();
   render();
 });
 
@@ -60,5 +82,25 @@ pickerEl.addEventListener('change', () => {
   const date = changeMonthValue(pickerEl.value);
   if (!date) return;
   currentDate = date;
+  clearEventDetails();
   render();
 });
+
+async function showEventDetails(events) {
+  eventDetailsEl.replaceChildren();
+  for (const event of events) {
+    const title = document.createElement('h2');
+    title.textContent = event.name;
+    const details = document.createElement('p');
+    details.textContent = 'Loading...';
+    eventDetailsEl.append(title, details);
+    try {
+      const response = await fetch(event.descriptionURL);
+      if (!response.ok) throw new Error(response.status);
+      details.textContent = await response.text();
+    } catch (error) {
+      details.textContent = 'Could not load the description.';
+      console.error(error);
+    }
+  }
+}
