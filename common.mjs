@@ -12,6 +12,10 @@ function formatDayLabel(date) {
   });
 }
 
+export function shiftMonth(date, offset) {
+  return new Date(date.getFullYear(), date.getMonth() + offset, 1);
+}
+
 export function getCalendarWeeks(today = new Date()) {
   const year = today.getFullYear();
   const month = today.getMonth();

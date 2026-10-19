@@ -1,13 +1,15 @@
-import { getCalendarWeeks } from "./common.mjs";
+import { shiftMonth, getCalendarWeeks } from './common.mjs';
 
-const daysElement = document.getElementById("days");
-const headingElement = document.getElementById("month-year");
+const daysElement = document.getElementById('days');
+const headingElement = document.getElementById('month-year');
 
-function renderCalendar(date = new Date()) {
+let date = new Date();
+
+function renderCalendar() {
   // Show the month and year
-  headingElement.textContent = date.toLocaleDateString("en-GB", {
-    month: "long",
-    year: "numeric",
+  headingElement.textContent = date.toLocaleDateString('en-GB', {
+    month: 'long',
+    year: 'numeric',
   });
 
   // Remove previously displayed calendar rows
@@ -18,10 +20,10 @@ function renderCalendar(date = new Date()) {
 
   // Create one table row for each week
   for (const week of weeks) {
-    const row = document.createElement("tr");
+    const row = document.createElement('tr');
     // Create seven cells for each week
     for (const day of week) {
-      const cell = document.createElement("td");
+      const cell = document.createElement('td');
       // Only show days belonging to the selected month
       if (!day.isOutsideMonth) {
         cell.textContent = day.day;
@@ -35,3 +37,15 @@ function renderCalendar(date = new Date()) {
 }
 // Display the current month when the page loads
 renderCalendar();
+
+// display previous month on click of previous button
+document.getElementById('prev').addEventListener('click', () => {
+  date = shiftMonth(date, -1);
+  renderCalendar();
+});
+
+// display next month on click of next button
+document.getElementById('next').addEventListener('click', () => {
+  date = shiftMonth(date, 1);
+  renderCalendar();
+});
