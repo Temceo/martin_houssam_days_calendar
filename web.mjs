@@ -2,6 +2,7 @@ import { shiftMonth, getCalendarWeeks } from './common.mjs';
 
 const daysElement = document.getElementById('days');
 const headingElement = document.getElementById('month-year');
+const monthPicker = document.getElementById('month-picker');
 
 let date = new Date();
 
@@ -12,6 +13,12 @@ function renderCalendar() {
     year: 'numeric',
   });
 
+  // Keep the month picker synchronised
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+
+  monthPicker.value = `${year}-${month}`;
+
   // Remove previously displayed calendar rows
   daysElement.replaceChildren();
 
@@ -20,10 +27,10 @@ function renderCalendar() {
 
   // Create one table row for each week
   for (const week of weeks) {
-    const row = document.createElement('tr');
+    const row = document.createElement("tr");
     // Create seven cells for each week
     for (const day of week) {
-      const cell = document.createElement('td');
+      const cell = document.createElement("td");
       // Only show days belonging to the selected month
       if (!day.isOutsideMonth) {
         cell.textContent = day.day;
