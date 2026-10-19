@@ -43,7 +43,9 @@ function render() {
         btn.classList.add('has-event');
         btn.title = names;
         btn.setAttribute('aria-label', `${cell.label}, ${names}`);
-        btn.addEventListener('click', () => showEventDetails(cell.events));
+        btn.addEventListener('click', () =>
+          showEventDetails(cell.events, cell.day)
+        );
 
         const toolTip = document.createElement('span');
         toolTip.className = 'tooltip';
@@ -86,14 +88,17 @@ pickerEl.addEventListener('change', () => {
   render();
 });
 
-async function showEventDetails(events) {
+async function showEventDetails(events, day) {
   eventDetailsEl.replaceChildren();
+
   for (const event of events) {
     const title = document.createElement('h2');
     title.textContent = event.name;
+    const date = document.createElement('h3');
+    date.textContent = `${event.dayName} ${day} ${event.monthName}`;
     const details = document.createElement('p');
     details.textContent = 'Loading...';
-    eventDetailsEl.append(title, details);
+    eventDetailsEl.append(title, date, details);
     try {
       const response = await fetch(event.descriptionURL);
       if (!response.ok) throw new Error(response.status);
