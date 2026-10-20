@@ -74,7 +74,7 @@ const DAYS = [
 
 const OCCURRENCES = { first: 1, second: 2, third: 3, last: 4 };
 
-function getEvents(event, date) {
+export function getEvents(event, date) {
   // exit if either month or day of week don't match event details
   if (MONTHS[date.getMonth()] !== event.monthName) return false;
   if (DAYS[date.getDay()] !== event.dayName) return false;
