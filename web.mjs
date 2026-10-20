@@ -31,10 +31,10 @@ function renderCalendar() {
       // Only show days belonging to the selected month
       if (!day.isOutsideMonth) {
         cell.textContent = day.day;
-      // Display the first commemorative event, if one exists
-      if (day.events.length > 0) {
+      // Display multiple commemorative events
+      for (const event of day.events) {
         const eventName = document.createElement("p");
-        eventName.textContent = day.events[0].name;
+        eventName.textContent = event.name;
         cell.append(eventName);
       }
     }
