@@ -27,17 +27,17 @@ function renderCalendar() {
     const row = document.createElement('tr');
     // Create seven cells for each week
     for (const day of week) {
-      const cell = document.createElement('td');
+      const cell = document.createElement("td");
       // Only show days belonging to the selected month
       if (!day.isOutsideMonth) {
         cell.textContent = day.day;
+      // Display multiple commemorative events
+      for (const event of day.events) {
+        const eventName = document.createElement("p");
+        eventName.textContent = event.name;
+        cell.append(eventName);
       }
-
-      // check for events
-      if (day.events.length > 0) {
-        console.log(day.label);
-        console.log(day.events);
-      }
+    }
       row.append(cell);
     }
 
