@@ -171,7 +171,11 @@ Additional checks:
 
 **Status:** PASS 
 
-[Watch Previous from January 2050 test](screenshots/09-previous-from-january-2050.mov)
+[Watch Previous from January 2050 test] 
+
+https://github.com/user-attachments/assets/0fb744e9-0f46-462b-a69f-786b494daefe
+
+
 
 
 ## 5.6. Test action : Next from December 2049
@@ -183,7 +187,11 @@ Additional checks:
 
 **Status:** PASS 
 
-[Watch Next from December 2049 test](screenshots/10-next-from-december-2049.mov)
+[Watch Next from December 2049 test]
+
+https://github.com/user-attachments/assets/2da3e954-3d6a-4b71-874a-9f12e4e901c0
+
+
 
 
 ## 5.7. Test action : Previous from January 2025
@@ -195,7 +203,11 @@ Additional checks:
 
 **Status:**  PASS 
 
-[Watch Previous from January 2025 test](screenshots/11-previous-from-january-2025.mov)
+[Watch Previous from January 2025 test]
+
+https://github.com/user-attachments/assets/2d546ac5-b350-4a0a-be51-bbeea74fb58a
+
+
 
 
 ## 5.8. Test action : Next from December 2024
@@ -206,7 +218,15 @@ Additional checks:
 
 **Status:**  PASS
 
-[Watch Next from December 2024 test](screenshots/12-next-from-december-2024.mov)
+[Watch Next from December 2024 test]
+
+https://github.com/user-attachments/assets/a847d073-aabd-4673-ab20-2cb2f393796a
+
+
+
+https://github.com/user-attachments/assets/171ff273-1038-48d8-a89b-80d92430d7a2
+
+
 
 
 ## 5.9. Test action : Reload the page
@@ -217,7 +237,10 @@ Additional checks:
 
 **Status:** PASS 
 
-[Watch reload page test](screenshots/13-reload-page.mov)
+[Watch reload page test]
+
+https://github.com/user-attachments/assets/ec1c9239-69fe-4823-b437-d04bc5420ecc
+
 
 
 ## 5.10. Test action : Trigger change with an empty month value
@@ -228,7 +251,9 @@ Additional checks:
 
 **Status:** PASS 
 
-[Watch Previous valid month restored test](screenshots/14-previous-valid-month-restored.mov) 
+[Watch Previous valid month restored test]
+
+https://github.com/user-attachments/assets/56f90074-eb85-4ff8-b911-3c08e22419f3
 
 
 
@@ -332,7 +357,9 @@ For the original five events in `days.json`, the expected output is 55 all-day e
 
 - Events cover 2020 through 2030 inclusive.
 
-[Watch imported calendar events](screenshots/18-video-events.mov)
+[Watch imported calendar events]
+
+https://github.com/user-attachments/assets/a2d51798-fba1-4ab8-8fd5-8fb33d15ff9f
 
 **Status:** PASS.
 
@@ -390,4 +417,6 @@ The manual checks were also completed successfully.
 
 **Video evidence :**
 
-[Watch manual accessibility checks](screenshots/20-manual-accessibility-checks.mov)
+[Watch manual accessibility checks]
+
+https://github.com/user-attachments/assets/847a142e-2c90-4396-ab61-0e808961ed17
